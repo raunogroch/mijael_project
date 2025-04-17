@@ -1,0 +1,46 @@
+services:
+  web:
+    build: .
+    container_name: apache_php
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./apache-config:/etc/apache2/sites-available
+      - ./php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mariadb:10.4.32
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sistema_asistencia_matema
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db # Nombre del servicio de MariaDB
+      PMA_PORT: 3306 # Puerto de MariaDB
+      PMA_USER: root # Usuario de MariaDB (o devuser)
+      PMA_PASSWORD: rootpassword # Contraseña de MariaDB
+    ports:
+      - "8080:80" # Acceso en http://localhost:8080
+    depends_on:
+      - db
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

@@ -1,0 +1,70 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.martian-mono-<uniquifier> {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+body{
+  
+ background: #E1270B;
+}
+h1{
+	text-align: center;
+	padding: 10px;
+	font-size: 50px;
+}
+#fecha{
+	text-align: center;
+	color: white;
+	font-size: 60px;
+}
+.container{
+	width: 700px;
+	background: white;
+	padding: 20px;
+	margin: auto;
+	margin-top: 20px;
+}
+.acceso{
+	color: blue;
+	font-size: 15 px;
+}
+.CI{
+	text-align: center;
+	font-size: 40px;
+	margin-bottom: 50px;
+}
+input{
+	width: 100%;
+	padding: 30px;
+	outline: none;
+}
+.botones
+{
+	display: flex;
+	margin-top: 20px;
+}
+.entrada{
+		background: red;
+		width: 100%;
+		padding: 25px 10px;
+		color: white;
+		text-align: center;
+		text-decoration: none;
+}
+.salida{
+	background: blue;
+	width: 100%;
+	padding: 25px 10px;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+
+}
