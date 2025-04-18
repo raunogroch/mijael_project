@@ -2,7 +2,7 @@
 
  session_start();
 if (empty($_SESSION["nombre"])and empty($_SESSION["apellido"]) ) {
-       header('location:login/login.php');
+       header('location:login');
    }
 
 ?>
@@ -18,20 +18,20 @@ if (empty($_SESSION["nombre"])and empty($_SESSION["apellido"]) ) {
     }  
 </script>
 <!-- primero se carga el topbar -->
-<?php require('./layout/topbar.php'); ?>
-<!-- luego se carga el sidebar -->
-<?php require('./layout/sidebar.php'); ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/views/layout/topbar.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/views/layout/sidebar.php'; ?>
+
 
 <!-- inicio del contenido principal -->
 <div class="page-content"  >
 
        <h4 class="text-center text-secondary" >REPORTE ASISTENCIA</h4>
 <?php 
-include "../modelo/conexion.php";
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/conexion.php';
 $sql=$conn->query("SELECT * from empleado");
 ?>
 
-     <form action="fpdf/ReporteAsistenciaFecha.php">
+     <form action="attendance_custom_report_date">
       <input type="date" name="txtfechadeinicio" class="input input__text mb-2">
        <input type="date" name="txtfechadefinal" class="input input__text mb-2">
        <select class="input input__select mb-2" name="txtempleado"  >
@@ -55,4 +55,4 @@ $sql=$conn->query("SELECT * from empleado");
 
 
 <!-- por ultimo se carga el footer -->
-<?php require('./layout/footer.php'); ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/views/layout/footer.php'; ?>

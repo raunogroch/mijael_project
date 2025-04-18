@@ -2,24 +2,25 @@
 
  session_start();
 if (empty($_SESSION["nombre"])and empty($_SESSION["password"]) ) {
-       header('location:login/login.php');
+       header('location:login');
    }
 
  $id=$_SESSION["id"];
 ?>
 
 <!-- primero se carga el topbar -->
-<?php require('./layout/topbar.php'); ?>
-<!-- luego se carga el sidebar -->
-<?php require('./layout/sidebar.php'); ?>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/views/layout/topbar.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/views/layout/sidebar.php';
+?>
 
 <!-- inicio del contenido principal -->
 <div class="page-content"  >
 
        <h4 class="text-center text-secondary" >PERFIL</h4>
        <?php
-include '../modelo/conexion.php';
-include '../controlador/controlador_modificar_perfil.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/conexion.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/controlador_modificar_perfil.php';
 $sql=$conn->query( "SELECT * from usuario where id_usuario=$id")
 ?>
   <div class="row" >
@@ -61,4 +62,6 @@ $sql=$conn->query( "SELECT * from usuario where id_usuario=$id")
 
 
 <!-- por ultimo se carga el footer -->
-<?php require('./layout/footer.php'); ?>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/views/layout/footer.php';
+?>

@@ -23,7 +23,7 @@
         <!-- font awesome -->
         <link rel="stylesheet" href="../public/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="../public/fontawesome/css/fontawesome.min.css">
-     <script src="https://kit.fontawesome.com/af641e81c7.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/af641e81c7.js" crossorigin="anonymous"></script>
 
         <!-- datatables -->
         <link rel="stylesheet" href="../public/app/publico/css/lib/datatables-net/datatables.min.css">
@@ -137,11 +137,11 @@
                                 <div class="dropdown-menu dropdown-menu-right pt-0" aria-labelledby="dd-user-menu">
 
                                     <h5 class="p-2 text-center bg-primary"> <?= $_SESSION['nombre']." ". $_SESSION['apellido'] ?> </h5>
-                                    <a class="dropdown-item" href="perfil.php"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
-                                    <a class="dropdown-item" href="cambiar_contra.php"><span class="font-icon glyphicon glyphicon-lock"></span>Cambiar contraseña</a>
+                                    <a class="dropdown-item" href="profile"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
+                                    <a class="dropdown-item" href="update_password"><span class="font-icon glyphicon glyphicon-lock"></span>Cambiar contraseña</a>
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="../controlador/controlador_cerrar.php">
+                                    <a class="dropdown-item" href="logout">
 
                                        
                                         

@@ -2,7 +2,7 @@
 
  session_start();
 if (empty($_SESSION["nombre"])and empty($_SESSION["password"]) ) {
-       header('location:login/login.php');
+       header('location:login');
    }
 
 ?>
@@ -21,10 +21,9 @@ if (empty($_SESSION["nombre"])and empty($_SESSION["password"]) ) {
     }  
 
 </script>
-<!-- primero se carga el topbar -->
-<?php require('./layout/topbar.php'); ?>
-<!-- luego se carga el sidebar -->
-<?php require('./layout/sidebar.php'); ?>
+
+<?php require $_SERVER['DOCUMENT_ROOT'].'/views/layout/topbar.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/views/layout/sidebar.php'; ?>
 
 <!-- inicio del contenido principal -->
 <div class="page-content"  >
@@ -34,15 +33,15 @@ if (empty($_SESSION["nombre"])and empty($_SESSION["password"]) ) {
        <?php
 
 
-include "../modelo/conexion.php";
-include "../controlador/controlador_modificar_usuario.php";
-include "../controlador/controlador_eliminar_usuario.php";
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/conexion.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/controlador_modificar_usuario.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/controlador_eliminar_usuario.php';
 
          $sql = $conn->query("SELECT * FROM usuario");
                    ?>     
-          <a href="registro_usuario.php" class="btn btn-primary btn-rounded mb-3"><i class="fa-solid fa-plus"></i> &nbsp;Nuevo Usuario</a>
+          <a href="new" class="btn btn-primary btn-rounded mb-3"><i class="fa-solid fa-plus"></i> &nbsp;Nuevo Usuario</a>
           <div class="text-right mb-2">
-            <a href="fpdf/ReporteUsuario.php" target="_blank" class="btn btn-successs"> <i class="fas fa-file-pdf"></i> REPORTES</a>
+            <a href="users_report" target="_blank" class="btn btn-successs"> <i class="fas fa-file-pdf"></i> REPORTES</a>
           </div>
   <table class="table table-bordered table-hover col-12" id="example">
   <thead>
@@ -72,7 +71,7 @@ include "../controlador/controlador_eliminar_usuario.php";
      
        <td> 
           <a href="" data-toggle="modal" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?= $datos->id_usuario ?>"> <i class="fa-solid fa-pen"></i></a>
-        <a href="usuario.php?id=<?= $datos->id_usuario ?>" onclick="return advertencia()" class="btn btn-danger">   <i class="fa-solid fa-trash"></i>  </a> </td>
+        <a href="users?id=<?= $datos->id_usuario ?>" onclick="return advertencia()" class="btn btn-danger">   <i class="fa-solid fa-trash"></i>  </a> </td>
     </tr>
 
 
@@ -132,8 +131,5 @@ include "../controlador/controlador_eliminar_usuario.php";
 
 </div>
 </div>
-<!-- fin del contenido principal -->
 
-
-<!-- por ultimo se carga el footer -->
-<?php require('./layout/footer.php'); ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/views/layout/footer.php'; ?>

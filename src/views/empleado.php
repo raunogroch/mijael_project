@@ -22,9 +22,10 @@ if (empty($_SESSION["nombre"])and empty($_SESSION["password"]) ) {
 
 </script>
 <!-- primero se carga el topbar -->
-<?php require('./layout/topbar.php'); ?>
-<!-- luego se carga el sidebar -->
-<?php require('./layout/sidebar.php'); ?>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/views/layout/topbar.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/views/layout/sidebar.php';
+?>
 
 <!-- inicio del contenido principal -->
 <div class="page-content"  >
@@ -34,9 +35,9 @@ if (empty($_SESSION["nombre"])and empty($_SESSION["password"]) ) {
        <?php
 
 
-include "../modelo/conexion.php";
-include "../controlador/controlador_modificar_empleado.php";
-include "../controlador/controlador_eliminar_empleado.php";
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/conexion.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/controlador_modificar_empleado.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/controller/controlador_eliminar_empleado.php';
 
          $sql = $conn->query("SELECT empleado.id_empleado,
                               empleado.nombre,
@@ -49,9 +50,9 @@ include "../controlador/controlador_eliminar_empleado.php";
          
           ?>
 
-            <a href="registro_empleado.php" class="btn btn-primary btn-rounded mb-3"><i class="fa-solid fa-plus"></i> &nbsp;Nuevo Personal</a>
+            <a href="staff_register" class="btn btn-primary btn-rounded mb-3"><i class="fa-solid fa-plus"></i> &nbsp;Nuevo Personal</a>
             <div class="text-right mb-2">
-            <a href="fpdf/ReporteEmpleado.php" target="_blank" class="btn btn-successs"> <i class="fas fa-file-pdf"></i> REPORTES</a>
+            <a href="staff_report" target="_blank" class="btn btn-successs"> <i class="fas fa-file-pdf"></i> REPORTES</a>
           </div>
 <table class="table table-bordered table-hover col-12" id="example">
   <thead>
@@ -158,4 +159,4 @@ include "../controlador/controlador_eliminar_empleado.php";
 
 
 <!-- por ultimo se carga el footer -->
-<?php require('./layout/footer.php'); ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'].'/views/layout/footer.php'; ?>

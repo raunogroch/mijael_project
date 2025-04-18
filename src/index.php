@@ -1,107 +1,69 @@
-<?php 
-error_reporting(0);
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> bien venido</title>
-    <link rel="stylesheet" href="public/estilos/estilos.css">
-
-   
-        
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet">
-
-<!-- pNotify -->
-        <link href="public/pnotify/css/pnotify.css" rel="stylesheet" />
-        <link href="public/pnotify/css/pnotify.buttons.css" rel="stylesheet" />
-        <link href="public/pnotify/css/custom.min.css" rel="stylesheet" />
-
-        
-
-        <!-- pnotify -->
-        <script src="public/pnotify/js/jquery.min.js">
-        </script>
-        <script src="public/pnotify/js/pnotify.js">
-        </script>
-        <script src="public/pnotify/js/pnotify.buttons.js">
-        </script>
+<?php
+$request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); 
+$basepath = '/';
 
 
-
-</head>
-<body>
-    <?php date_default_timezone_set("America/La_Paz");
-     ?>
-    <h1> <center> BIENVENIDO, REGISTRA TU ASISTENCIA </center> </h1>
-     <h1> <center> INSTITUTO MATEMA  </center></h1>
-    <h2 id="fecha"> <?= date("d/m/Y, h:i:s") ?> </h2>
-    <?php 
-    include "modelo/conexion.php";
-    include "controlador/controlador_registrar_asistenacia.php";
-    ?>
-    <div class="container">
-        <a class="acceso" href="vista/login/login.php">ingresar al sistema</a>
-        <p class="CI">Ingrese su N° de Cedula de Identidad </p>
-        <form  action="" method="POST">
-            <input type="number" placeholder="N° C.I." name="txtCI" id="txtCI">
-            <div class="botones">
-                
-            
-                <button id="entrada" class="entrada" type="submit" name="btnentrada" value="ok"> ENTRADA </button>
-                <button  id="salida" class="salida" type="submit" name="btnsalida" value="ok"> SALIDA </button>
-
-
-            </div>
-            
-        </form>
-    </div>
-
-    <script >
-        
-            
-
-            setInterval(() => {
-            let fecha=new Date();
-            let fechaHora=fecha.toLocaleString();
-            document.getElementById("fecha").textContent=fechaHora;
-
-            },1000);
-
-    </script>
-
-<script > 
-//controlador de digitos
-
-let CI= document.getElementById("txtCI");
-CI.addEventListener("input", function()
-{
-    if (this.value.length > 10) {
-
-        this.value=this.value.slice(0,10)
-    }
-
-})
-// salida botones
-
- document.addEventListener("keyup", function(event){
-    if (event.code=="ArrowLeft") {
-
-        document.getElementById("entrada").click()
-
-    } else { 
-        if (event.code=="ArrowRight") {
-            document.getElementById("salida").click()
-        }
-    }
- }
-    )
- </script>
-
-
-</body>
-</html>
+switch (str_replace($basepath, '', $request)) {
+    case '':
+    case '/':
+        require 'views/main.php';
+        break;
+    case 'profile':
+        require 'views/perfil.php';
+        break;
+    case 'update_password':
+        require 'views/cambiar_contra.php';
+        break;
+    case 'principal':
+        require 'views/inicio.php';
+        break;
+    case 'users': 
+        require 'views/usuario.php';
+        break;
+    case 'users_new': 
+        require 'views/registro_usuario.php';
+        break;
+    case 'users_report': 
+        require 'views/fpdf/ReporteUsuario.php';
+        break;
+    case 'staff': 
+        require 'views/empleado.php';
+        break;
+    case 'staff_register': 
+        require 'views/registro_empleado.php';
+        break;
+    case 'staff_report': 
+        require 'views/fpdf/ReporteEmpleado.php';
+        break;
+    case 'attendance': 
+        require 'views/inicio.php';
+        break;
+    case 'attendance_report': 
+        require 'views/fpdf/ReporteAsistencia.php';
+        break;
+    case 'attendance_custom_report': 
+        require 'views/Reporte_Asistencia.php';
+        break;
+    case 'attendance_custom_report_date': 
+        require 'views/fpdf/ReporteAsistenciaFecha.php';
+        break;
+    case 'position': 
+        require 'views/cargo.php';
+        break;
+    case 'position_report': 
+        require 'views/fpdf/ReporteCargo.php';
+        break;
+    case 'about': 
+        require 'views/acerca.php';
+        break;
+    case 'login':
+        require 'views/login/login.php';
+        break;
+    case 'logout':
+        require 'controller/controlador_cerrar.php';
+        break;
+    default:
+        http_response_code(404);
+        require 'views/404.php';
+        break;
+}
