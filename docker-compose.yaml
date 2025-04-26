@@ -1,17 +1,21 @@
 services:
   web:
-    build: .
+    build:
+      context: ./docker  # Cambiado para usar docker como contexto
+      dockerfile: Dockerfile  # Ahora busca el Dockerfile en el contexto
     container_name: apache_php
     ports:
-      - "80:80"
+      - "81:80"
     volumes:
       - ./src:/var/www/html
-      - ./apache-config:/etc/apache2/sites-available
-      - ./php.ini:/usr/local/etc/php/php.ini
+      - ./docker/apache-config:/etc/apache2/sites-available
+      - ./docker/php.ini:/usr/local/etc/php/php.ini
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
     depends_on:
       - db
+    networks:
+      - app-network
     restart: unless-stopped
 
   db:
@@ -23,24 +27,30 @@ services:
       MYSQL_USER: devuser
       MYSQL_PASSWORD: devpass
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./docker/DB/data:/var/lib/mysql
+      - ./docker/DB/init-scripts:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    networks:
+      - app-network
     restart: unless-stopped
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     environment:
-      PMA_HOST: db # Nombre del servicio de MariaDB
-      PMA_PORT: 3306 # Puerto de MariaDB
-      PMA_USER: root # Usuario de MariaDB (o devuser)
-      PMA_PASSWORD: rootpassword # Contraseña de MariaDB
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
     ports:
-      - "8080:80" # Acceso en http://localhost:8080
+      - "8081:80"
     depends_on:
       - db
+    networks:
+      - app-network
     restart: unless-stopped
 
-volumes:
-  mysql_data:
+networks:
+  app-network:
+    driver: bridge
