@@ -1,11 +1,12 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/views/fpdf/fpdf.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/helpers/functions.php';
 
 class PDF extends FPDF
 {
     private $conn; // Add a property to store the connection
-    
+
     // Add a constructor to accept the connection
     function __construct($connection) {
         parent::__construct();
@@ -99,7 +100,7 @@ while ($datos_reporte = $consulta_reporte_asistencia->fetch_object()) {
     $pdf->Cell(30, 10, utf8_decode($datos_reporte->CI), 1, 0, 'C', 0);
     $pdf->Cell(50, 10, utf8_decode($datos_reporte->nomCargo), 1, 0, 'C', 0);
     $pdf->Cell(50, 10, utf8_decode($datos_reporte->entrada), 1, 0, 'C', 0);
-    $pdf->Cell(50, 10, utf8_decode($datos_reporte->salida), 1, 1, 'C', 0);
+    $pdf->Cell(50, 10, utf8_decode(VerifyExitAttendace($datos_reporte->entrada, $datos_reporte->salida)), 1, 1, 'C', 0);
 }
 
 $pdf->Output('Reporte Asistencia.pdf', 'I');

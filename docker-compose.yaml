@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile  # Ahora busca el Dockerfile en el contexto
     container_name: apache_php
     ports:
-      - "81:80"
+      - "80:80"
     volumes:
       - ./src:/var/www/html
       - ./docker/apache-config:/etc/apache2/sites-available
@@ -30,7 +30,7 @@ services:
       - ./docker/DB/data:/var/lib/mysql
       - ./docker/DB/init-scripts:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - app-network
     restart: unless-stopped
@@ -44,7 +44,7 @@ services:
       PMA_USER: root
       PMA_PASSWORD: rootpassword
     ports:
-      - "8081:80"
+      - "8082:80"
     depends_on:
       - db
     networks:
