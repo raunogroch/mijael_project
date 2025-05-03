@@ -11,13 +11,17 @@ git clone https://github.com/raunogroch/mijael_project.git
 ```
 cd mijael_project
 ```
-
-# 4.- Levanta el proyecto
+# 4.- Moviendonos a la rama deploy
+```
+git chechout deploy
+```
+ 
+# 5.- Levanta el proyecto
 ```
 docker-compose up -d
 ```
 
-# 5.- Abre el sistema 
+# 6.- Abre el sistema 
 ```
 http://localhost:81 #principal
 http://localhost:8081 #base de datos
