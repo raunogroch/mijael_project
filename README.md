@@ -13,7 +13,7 @@ cd mijael_project
 ```
 # 4.- Moviendonos a la rama deploy
 ```
-git chechout deploy
+git checkout deploy
 ```
  
 # 5.- Levanta el proyecto
